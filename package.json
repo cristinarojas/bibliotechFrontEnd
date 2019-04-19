@@ -1,0 +1,51 @@
+{
+  "scripts": {
+    "lint:eslint": "eslint --ext .js,.html .",
+    "format:eslint": "eslint --ext .js,.html . --fix",
+    "lint:prettier": "prettier \"**/*.js\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "format:prettier": "prettier \"**/*.js\" --write",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "test": "karma start",
+    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "test:es5": "karma start karma.es5.config.js",
+    "test:es5:watch": "karma start karma.es5.config.js --auto-watch=true --single-run=false",
+    "test:es5:bs": "karma start karma.es5.bs.config.js",
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "start:build": "http-server dist -o",
+    "watch:build": "rimraf dist && rollup --watch -c rollup.config.js & http-server dist -o",
+    "start": "owc-dev-server --open ./src"
+  },
+  "devDependencies": {
+    "@open-wc/eslint-config": "^0.3.0",
+    "@open-wc/prettier-config": "^0.1.0",
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.0",
+    "husky": "^1.0.0",
+    "lint-staged": "^8.0.0",
+    "@open-wc/testing-karma": "^0.4.0",
+    "webpack-merge": "^4.1.5",
+    "@open-wc/testing-karma-bs": "^0.2.0",
+    "@open-wc/testing": "^0.9.0",
+    "@open-wc/building-rollup": "^0.1.1",
+    "http-server": "^0.11.1",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.6.0",
+    "@open-wc/polyfills-loader": "^0.2.1",
+    "owc-dev-server": "^0.1.2",
+    "eslint-plugin-lit": "^0.5.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "name": "my-app",
+  "license": "MIT",
+  "dependencies": {
+    "lit-html": "^1.0.0",
+    "lit-element": "^2.0.1"
+  }
+}
